@@ -1,0 +1,416 @@
+
+<% include header.ejs%>
+<link rel='stylesheet' href='/stylesheets/entry.css' />
+<script src='/javascripts/entry.js'></script>
+
+
+<div class="container">
+    <div class="row">
+     
+    	<form class="form-horizontal">
+    	   <div class="form-group">
+			<label class="col-md-2" for="Sid">输入id</label>
+			<div class="col-md-4">
+				<input type="text" class="form-control" id="Sid">
+			</div>
+
+			
+			<div class="col-md-2">
+				<input type="text" class="form-control" id="Stid">
+			</div>
+			
+			<div class="col-md-2">
+				<input type="text" class="form-control" id="Sdid">
+			</div>
+
+			<div class="col-md-2">
+			    <button type="button" class="col-md-12 btn btn-primary" id="getBook">获取</button>
+			</div>
+		   </div>
+    	</form>
+    </div>
+    <div class="row">
+		<form id="form" class="form-horizontal" action="/admin/newBook" method="post">
+
+		    <div class="form-group" style='display: none'>
+				<label class="col-md-2 control-lable" for="_id">_id</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+					    <input id="_id" name="_id" class="form-control" type="text" value="<%= book._id%>">
+				    <%}else{%>
+					    <input id="_id" name="_id" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="id">id</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="id" name="id" class="form-control" type="text" value="<%= book.id%>">
+				    <%}else{%>
+				    <input id="id" name="id" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="title">title</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="title" name="title" class="form-control" type="text" value="<%= book.title%>">
+				    <%}else{%>
+				    <input id="title" name="title" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="origin_title">origin_title</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="origin_title" name="origin_title" class="form-control" type="text" value="<%= book.origin_title%>">
+				    <%}else{%>
+				    <input id="origin_title" name="origin_title" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="subtitle">subtitle</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="subtitle" name="subtitle" class="form-control" type="text" value="<%= book.subtitle%>">
+				    <%}else{%>
+				    <input id="subtitle" name="subtitle" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+
+
+			
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="author">author</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="author" name="author" class="form-control" type="text" value="<%= book.author.join('/')%>">
+				    <%}else{%>
+				    <input id="author" name="author" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="translator">translator</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="translator" name="translator" class="form-control" type="text" value="<%= book.translator.join('/')%>">
+				    <%}else{%>
+				    <input id="translator" name="translator" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="rating">rating</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="rating" name="rating" class="form-control" type="text" value="<%= book.rating.average%>">
+				    <%}else{%>
+				    <input id="rating" name="rating" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="numRaters">numRaters</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="numRaters" name="numRaters" class="form-control" type="text" value="<%= book.rating.numRaters%>">
+				    <%}else{%>
+				    <input id="numRaters" name="numRaters" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+
+			
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="tags">tags</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="tags" name="tags" class="form-control" type="text" value="<%= book.tags.join('/')%>">
+				    <%}else{%>
+				    <input id="tags" name="tags" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>		
+
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="series_id">series_id</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="series_id" name="series_id" class="form-control" type="text" value="<%= book.series.id%>">
+				    <%}else{%>
+				    <input id="series_id" name="series_id" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>	
+
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="series_title">series_title</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="series_title" name="series_title" class="form-control" type="text" value="<%= book.series.title%>">
+				    <%}else{%>
+				    <input id="series_title" name="series_title" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>		
+
+
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="publisher">publisher</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="publisher" name="publisher" class="form-control" type="text" value="<%= book.publisher%>">
+				    <%}else{%>
+				    <input id="publisher" name="publisher" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="binding">binding</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="binding" name="binding" class="form-control" type="text" value="<%= book.binding%>">
+				    <%}else{%>
+				    <input id="binding" name="binding" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>		
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="pages">pages</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="pages" name="pages" class="form-control" type="text" value="<%= book.pages%>">
+				    <%}else{%>
+				    <input id="pages" name="pages" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>			
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="pubdate">pubdate</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="pubdate" name="pubdate" class="form-control" type="text" value="<%= book.pubdate%>">
+				    <%}else{%>
+				    <input id="pubdate" name="pubdate" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>	
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="price">price</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="price" name="price" class="form-control" type="text" value="<%= book.price%>">
+				    <%}else{%>
+				    <input id="price" name="price" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="ebook_price">ebook_price</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="ebook_price" name="ebook_price" class="form-control" type="text" value="<%= book.ebook_price%>">
+				    <%}else{%>
+				    <input id="ebook_price" name="ebook_price" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="ebook_url">ebook_url</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="ebook_url" name="ebook_url" class="form-control" type="text" value="<%= book.ebook_url%>">
+				    <%}else{%>
+				    <input id="ebook_url" name="ebook_url" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="large_image">large_image</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="large_image" name="large_image" class="form-control" type="text" value="<%= book.large_image%>">
+				    <%}else{%>
+				    <input id="large_image" name="large_image" class="form-control" type="text">
+                      
+				    <%}%>
+
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="medium_image">medium_image</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="medium_image" name="medium_image" class="form-control" type="text" value="<%= book.medium_image%>">
+				    <%}else{%>
+				    <input id="medium_image" name="medium_image" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="small_image">small_image</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="small_image" name="small_image" class="form-control" type="text" value="<%= book.small_image%>">
+				    <%}else{%>
+				    <input id="small_image" name="small_image" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="url">url</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="url" name="url" class="form-control" type="text" value="<%= book.url%>">
+				    <%}else{%>
+				    <input id="url" name="url" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="alt">alt</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="alt" name="alt" class="form-control" type="text" value="<%= book.alt%>">
+				    <%}else{%>
+				    <input id="alt" name="alt" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="alt_title">alt_title</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="alt_title" name="alt_title" class="form-control" type="text" value="<%= book.alt_title%>">
+				    <%}else{%>
+				    <input id="alt_title" name="alt_title" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="isbn10">isbn10</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="isbn10" name="isbn10" class="form-control" type="text" value="<%= book.isbn10%>">
+				    <%}else{%>
+				    <input id="isbn10" name="isbn10" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="isbn13">isbn13</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="isbn13" name="isbn13" class="form-control" type="text" value="<%= book.isbn13%>">
+				    <%}else{%>
+				    <input id="isbn13" name="isbn13" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="author_intro">author_intro</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="author_intro" name="author_intro" class="form-control" type="text" value="<%= book.author_intro%>">
+				    <%}else{%>
+				    <input id="author_intro" name="author_intro" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="summary">summary</label>
+				<div class="col-md-10">
+				    <%if(book){%>
+				    <input id="summary" name="summary" class="form-control" type="text" value="<%= book.summary%>">
+				    <%}else{%>
+				    <input id="summary" name="summary" class="form-control" type="text">
+				    <%}%>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+
+
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+				    <button id="save" name="save" class="form-control btn btn-primary" type="submit">保存</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<% include footer.ejs%>
+
+
+

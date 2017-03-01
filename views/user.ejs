@@ -1,0 +1,82 @@
+
+<% include header.ejs%>
+<link rel='stylesheet' href='/stylesheets/user.css' />
+<script src='/javascripts/user.js'></script>
+
+
+<div class="container">
+   
+    <div class="row">
+		<form id="form" class="form-horizontal" action="/user/update" method="post">
+
+		    <div class="form-group" style='display: none'>
+				<label class="col-md-2 control-lable" for="_id">_id</label>
+				<div class="col-md-10">  
+					<input id="_id" name="_id" class="form-control" type="text" value="<%= user._id%>">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="name">name</label>
+				<div class="col-md-10">				   
+				    <input id="name" name="name" class="form-control" type="text" value="<%= user.name%>">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="admin">admin</label>
+				<div class="col-md-10">				   
+				    <input readonly="true" id="admin" name="admin" class="form-control" type="text" value="<%= user.admin%>">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="email">email</label>
+				<div class="col-md-10">		    
+				    <input id="email" name="email" class="form-control" type="text" value="<%= user.email%>">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="sex">sex</label>
+				<div class="col-md-10">   
+				    <input id="sex" name="sex" class="form-control" type="text" value="<%= user.sex%>">  
+
+		    		  		<label class="checkbox-inline">
+		    		  		    <input type="radio" id="male" value="male" name="sex" checked=""><span class="sex_t">male</span>
+		    		  		    <input type="text" id="set_img" name="image" value="/images/male.png" style="display: none" >
+		    		  		</label>
+		
+		    		  		<label class="checkbox-inline">
+		    		  		    <input type="radio" id="female" value="female" name="sex"><span class="sex_t">female</span>
+		    		  		</label>
+
+				</div>
+			</div>
+	
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="image">image</label>
+				<div class="col-md-10">	   
+				    <input id="image" name="image" class="form-control" type="text" value="<%= user.image%>">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-md-2 control-lable" for="autograph">autograph</label>
+				<div class="col-md-10"> 
+				    <input id="autograph" name="autograph" class="form-control" type="text" value="<%= user.autograph%>">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+				    <button id="save" name="save" class="form-control btn btn-primary" type="submit">保存</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<% include footer.ejs%>
+
+
+

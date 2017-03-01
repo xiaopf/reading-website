@@ -1,0 +1,51 @@
+<% include header.ejs%>
+
+<link rel='stylesheet' href='/stylesheets/bookList.css' />
+<script src='/javascripts/bookList.js'></script>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 table-resposive">
+			<table class="table table-bordered">
+				<caption><h2>BOOK LIST</h2></caption>
+				<thead>
+					<tr>
+						<td class="h4">index</td>
+						<td class="h4">id</td>
+						<td class="h4">image</td>
+						<td class="h4">title</td>
+						<td class="h4">author</td>
+						<td class="h4">rating</td>
+						<td class="h4">publisher</td>
+						
+						<td class="h4">isbn13</td>
+						<td class="h4">operate</td>
+					</tr>
+				</thead>
+				<tbody>
+					<% books.forEach(function(book,index){%>
+                      <tr >
+                      	<td class="h4"><%=index+1 %></td>
+                      	<td><%=book.id %></td>
+                      	<td><img class="img_size" src="<%=book.small_image %>" alt=""></td>
+                      	<td><%=book.title %></td>
+                      	<td><%=book.author.join('/') %></td>
+                      	<td><%=book.rating.average %></td>
+                      	<td><%=book.publisher %></td>
+                      	
+                      	<td><%=book.isbn13 %></td>
+                      	<td>
+	                      	<a href="/admin/bookList/updateBook/<%=book.id %>" type="button" class="update operate btn btn-success">update</a>
+	                      	<button bookId="<%=book.id %>" type="button" class="delete operate btn btn-danger">delete</button>
+                      	</td>
+                      </tr>
+
+					<%})%>
+				</tbody>
+			</table>
+		</div>
+	
+	</div>
+</div>
+
+<% include footer.ejs%>

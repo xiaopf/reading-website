@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<script src='/javascripts/jquery.min.js'></script>
+<link rel="stylesheet" href='/stylesheets/css/bootstrap.min.css' >
+<script src='/javascripts/bootstrap.min.js'></script>
+<link rel='stylesheet' href='/stylesheets/header.css' />
+<script src='/javascripts/header.js'></script>
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/index">X-Read</a>
+		</div>
+		
+		<form class="navbar-form navbar-left">
+			<div class="form-group">
+				<input type="text" class="search_input form-contrl">
+			</div>
+			<button type="button" class="search_btn btn btn-default navbar-btn"><span class="glyphicon glyphicon-search"></span></button>
+		</form>	
+
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/index">Home</a>
+		</div>
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/admin/entry">Add</a>
+		</div>
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/admin/bookList">Books</a>
+		</div>
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/admin/userList">Users</a>
+		</div>
+
+	
+		<ul class="nav navbar-nav navbar-right">
+			<li>
+				<a id="header_a"  href="/user/<%= name %>">
+					<img class="header_pic" src="<%= src %>">
+				</a>
+			</li>
+			<li><a href="#"><%= name %></a></li>
+			<li>
+			    <form method="get" action="/logout">
+				   <button class="logout btn" id="logout">log out</button> 
+			    </form>       
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+
+

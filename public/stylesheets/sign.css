@@ -1,0 +1,58 @@
+.form-horizontal{
+	margin: 20px;
+}
+.panel{
+	margin:20px auto;
+	width: 360px;
+}
+.nav_wid{
+	width:146px;
+}
+h1{ 
+	font-size:70px;
+	color: #426ab3; 
+	margin:100px 0 30px 0;
+}
+h4{ 
+	font-size: 	20px;
+	color: grey;
+	font-family: Helvetica;
+	margin:0 0 40px 0;
+}
+hr{
+	width:50%;
+}
+body{
+
+	background: #F7FAFC;
+	overflow: hidden;
+	background: #fff;
+}
+#canvas{
+	display: inline-block; 
+	position:absolute;
+    left:0px;
+    top:0px;
+    z-index:-1;
+}
+
+.alert{
+	padding:5px;
+	margin-bottom: 0;
+}
+
+.parent{
+	position: relative;
+}
+
+.tail{
+	position: absolute;
+	top:6px;
+	font-size: 18px;
+	right: 20px;
+	margin: 2px;
+}
+
+.sex_t{
+    margin:0 5px 4px 5px; 
+}

@@ -1,0 +1,22 @@
+
+.book{
+		display: inline-block;
+		width: 270px;
+		margin:10px 5px 10px 5px;
+}
+.book p{
+		margin-bottom:5px;
+}
+.bk_pic{
+		padding: 0;
+		float: left;
+		width: 100px;
+		padding: 5px;
+}
+.bk_p{
+		padding: 0;
+		float: right;
+		width: 170px;
+		padding: 5px;
+
+}
