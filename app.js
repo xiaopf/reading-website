@@ -5,6 +5,8 @@ var logger = require('morgan');//日志中间件
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');//...........
 
+
+
 var session=require('express-session');
 var MongoStore=require('connect-mongo')(session);
 
@@ -36,6 +38,8 @@ app.use(session({
 	    collection:'sessions'
 	})
 }));
+
+
 
 app.locals.moment=require('moment');
 

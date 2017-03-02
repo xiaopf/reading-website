@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
+<title>X Read</title>
 <script src='/javascripts/jquery.min.js'></script>
 <link rel="stylesheet" href='/stylesheets/css/bootstrap.min.css' >
 <script src='/javascripts/bootstrap.min.js'></script>
@@ -23,19 +23,20 @@
 			</div>
 			<button type="button" class="search_btn btn btn-default navbar-btn"><span class="glyphicon glyphicon-search"></span></button>
 		</form>	
-
-		<div class="navbar-header">
-			<a class="navbar-brand" href="/index">Home</a>
-		</div>
-		<div class="navbar-header">
-			<a class="navbar-brand" href="/admin/entry">Add</a>
-		</div>
-		<div class="navbar-header">
-			<a class="navbar-brand" href="/admin/bookList">Books</a>
-		</div>
-		<div class="navbar-header">
-			<a class="navbar-brand" href="/admin/userList">Users</a>
-		</div>
+        <%if(admin=='admin'){%>
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/index">Home</a>
+			</div>
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/admin/entry">Add</a>
+			</div>
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/admin/bookList">Books</a>
+			</div>
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/admin/userList">Users</a>
+			</div>
+		<%}%>
 
 	
 		<ul class="nav navbar-nav navbar-right">
@@ -44,7 +45,7 @@
 					<img class="header_pic" src="<%= src %>">
 				</a>
 			</li>
-			<li><a href="#"><%= name %></a></li>
+			<li><a href="/user/<%= name %>"><%= name %></a></li>
 			<li>
 			    <form method="get" action="/logout">
 				   <button class="logout btn" id="logout">log out</button> 

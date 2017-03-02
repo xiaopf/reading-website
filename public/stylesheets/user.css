@@ -1,2 +1,44 @@
+.sex_t{
+    margin:0 5px 4px 5px; 
+}
 
+.col-md-2{
+	margin-top: 6px;
+}
+#form{
+	position: relative;
+	margin-top: 60px;
+}
 
+#head_pic,#head_a_p{
+	width: 140px;
+	height: 140px;
+	position: absolute;
+	right:40px;
+	top:10px;
+
+}
+#head_pic{
+	z-index: -1;
+	border:2px double grey ;
+	padding:5px; 
+}
+#head_a_p{
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: bold;
+	text-align:center;
+	padding-top: 40px;
+	opacity:0;
+	color: #000;
+	background-color: grey;
+	cursor: pointer;
+}
+
+#head_a_p:hover{
+	opacity:0.8;
+}
+
+#save{
+	margin-top: 16px;
+}

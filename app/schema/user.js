@@ -32,8 +32,8 @@ var UserSchema=new Schema({
 	},
 
 	admin:{
-		type:Boolean,
-		default:false
+		type:String,
+		default:'user'
 	},
 
 	createdAt:Date,
