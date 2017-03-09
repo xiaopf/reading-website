@@ -4,6 +4,9 @@
 		width: 270px;
 		margin:10px 5px 10px 5px;
 }
+.bk_rating{
+	color: rgb(224, 144, 21);
+}
 .book p{
 		margin-bottom:5px;
 }
@@ -18,5 +21,4 @@
 		float: right;
 		width: 170px;
 		padding: 5px;
-
 }

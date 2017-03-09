@@ -18,7 +18,7 @@
                           
 					      <p class="bk_author">作者：<%= book.author.join('/')%></p>
 
-					      <p class="bk_tags"><%=book.tags.join('/').substring(0,20) %></p>
+					      <p class="bk_tags"><%=book.tags.slice(0,5).join('/') %></p>
 				      </div>
 				  </div>
 			      <div class="bk_summary"><%= book.summary.substring(0,52) %> <a href="/detail/<%= book.id%>">(查看全部)</a></div>

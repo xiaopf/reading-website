@@ -47,6 +47,7 @@ exports.user=function(req, res, next) {
         if(err){console.log(err);};   
         res.render('user',{
             title: 'X Read',
+            _id:s_user._id,
             name:user.name,
             src:user.image,
             admin:user.admin,
@@ -64,6 +65,7 @@ exports.userList=function(req, res, next) {
               if(users[0]){
                   res.render('userList', { 
                     title: 'X Read',
+                    _id:s_user._id,
                     name:user.name,
                     src:user.image,
                     admin:user.admin,

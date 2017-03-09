@@ -17,11 +17,11 @@
 			<a class="navbar-brand" href="/index">X-Read</a>
 		</div>
 		
-		<form class="navbar-form navbar-left">
+		<form class="navbar-form navbar-left" action="/search" method="get">
 			<div class="form-group">
-				<input type="text" class="search_input form-contrl">
+				<input type="text" class="search_input form-contrl" name="search_content" placeholder="书名、作者、ISBN">
 			</div>
-			<button type="button" class="search_btn btn btn-default navbar-btn"><span class="glyphicon glyphicon-search"></span></button>
+			<button type="submit" class="search_btn btn btn-default navbar-btn"><span class="glyphicon glyphicon-search"></span></button>
 		</form>	
         <%if(admin=='admin'){%>
 			<div class="navbar-header">
@@ -41,14 +41,14 @@
 	
 		<ul class="nav navbar-nav navbar-right">
 			<li>
-				<a id="header_a"  href="/user/<%= name %>">
+				<a id="header_a" _id="<%= _id%>" name="<%= name %>"  href="/user/<%= name %>">
 					<img class="header_pic" src="<%= src %>">
 				</a>
 			</li>
-			<li><a href="/user/<%= name %>"><%= name %></a></li>
+			<li><a href="/user/<%= name %>"><span class="glyphicon glyphicon-user"></span> &nbsp<%= name %></a></li>
 			<li>
 			    <form method="get" action="/logout">
-				   <button class="logout btn" id="logout">log out</button> 
+				   <button class="logout btn" id="logout"><span class="glyphicon glyphicon-log-out"></span>&nbsplog out</button> 
 			    </form>       
 			</li>
 		</ul>

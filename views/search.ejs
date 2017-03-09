@@ -1,0 +1,39 @@
+
+<% include header.ejs%>
+
+<link rel='stylesheet' href='/stylesheets/search.css' />
+<script src='/javascripts/search.js'></script>
+
+
+
+<div class="container">
+	<div class="row">
+			<% books.forEach(function(book){%>
+			  <li class="book">
+			        <div class="bk_h">
+					    <a href="/detail/<%= book.id%>"><img class="bk_pic" src="<%= book.medium_image %>"></a>
+						<div class="bk_p">
+						      <a href="/detail/<%= book.id%>"><p class="bk_title"><%= book.title %></p></a>
+						      <p class="bk_rating">评分：<%= book.rating.average %></p>             
+						      <p class="bk_info">
+						      <%= book.author.join('/')%><span>/</span><%= book.publisher%><span>/</span><%= book.pubdate%><span>/</span><%= book.price%></p>
+						      <p class="bk_tags"><%=book.tags.join('/') %></p>
+					    </div>			        	
+			        </div>
+
+			        <div class="bk_summary"><%= book.summary.substring(0,100) %> <a href="/detail/<%= book.id%>">(查看全部)</a></div>
+			  </li>             
+			<% }); %>
+		</ul>
+	</div>
+</div>
+
+<% include footer.ejs%>
+
+
+
+publisher" : "国际文化出版公司",
+
+
+    "pubdate" : "2010-9",
+    "price

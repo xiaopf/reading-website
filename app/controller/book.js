@@ -1,5 +1,6 @@
 var Book=require('../model/book.js');
 var User=require('../model/user.js');
+var Discuss=require('../model/discuss.js');
 
 exports.index=function(req, res, next) {
     var s_user=req.session.user;
@@ -11,6 +12,7 @@ exports.index=function(req, res, next) {
             if(books[0]){
                 res.render('index', { 
                   title: 'X Read',
+                  _id:s_user._id,
                   name:user.name,
                   src:user.image,
                   admin:user.admin,
@@ -28,18 +30,92 @@ exports.detail=function(req, res, next) {
     Book.findOne({id:p_id},function(err,book){
         if(err){console.log(err);};
 
-        User.findById(s_user._id,function(err,user){
-            if(err){console.log(err);};
-            res.render('detail',{
-                title: 'X Read',
-                name:user.name,
-                src:user.image,
-                admin:user.admin,
-                book:book,
-            });  
-        });
+        Discuss .find({book_id:book._id})
+                .populate('reply_from_id')
+                .populate('reply_to_id')
+                .exec(function(err,discusses){
+                    if(err){console.log(err);};
+
+                    User.findById(s_user._id,function(err,user){
+                        if(err){console.log(err);};
+                        res.render('detail',{
+                            title: 'X Read',
+                            name:user.name,
+                            _id:s_user._id,
+                            src:user.image,
+                            admin:user.admin,
+                            book:book,
+                            discusses:discusses,
+                        });  
+                    });
+                });
     });      
 }; 
+
+
+exports.addDiscuss=function(req,res){
+  var discuss=new Discuss(req.body);
+  discuss.save(function(err){
+    if (err) {console.error(err);};
+  })
+}
+
+
+
+
+exports.upadateLike=function(req,res){
+  var q_id=req.query._id;
+  var q_count=req.query.count;
+
+  Discuss.findById(q_id,function(err,discuss){
+    discuss.like_count=q_count;
+    let _id=discuss._id;
+    delete discuss._id;
+    Discuss.update({_id:_id},discuss,function(err){
+      if (err) {console.error(err);};
+    });
+  });
+}
+
+exports.upadateUnlike=function(req,res){
+  var q_id=req.query._id;
+  var q_count=req.query.count;
+
+  Discuss.findById(q_id,function(err,discuss){
+    discuss.unlike_count=q_count;
+    let _id=discuss._id;
+    delete discuss._id;
+    Discuss.update({_id:_id},discuss,function(err){
+      if (err) {console.error(err);};
+    });
+  });
+
+}
+
+
+exports.search=function(req,res){
+  var s_user=req.session.user;
+  var sc=req.query.search_content;
+
+  Book.find({
+      $or:[{'title':new RegExp('.*'+sc+'.*','i')},{'author.0':new RegExp('.*'+sc+'.*','i')},{'isbn13':sc}]
+  },function(err,books){
+      User.findById(s_user._id,function(err,user){
+        if(err){console.log(err);};
+        res.render('search',{
+              title: 'X Read',
+              name:user.name,
+              _id:s_user._id,
+              src:user.image,
+              admin:user.admin,
+              books:books,
+        });
+     });
+  });
+};
+
+
+
 
 exports.entry=function(req, res, next) {
  
@@ -49,6 +125,7 @@ exports.entry=function(req, res, next) {
         if(err){console.log(err);};
         res.render('entry',{
             title: 'X Read',
+            _id:s_user._id,
             name:user.name,
             src:user.image,
             admin:user.admin,
@@ -69,6 +146,7 @@ exports.bookList=function(req, res, next) {
             if(books[0]){
                 res.render('bookList', { 
                   title: 'X Read',
+                  _id:s_user._id,
                   name:user.name,
                   src:user.image,
                   admin:user.admin,
@@ -92,6 +170,7 @@ exports.updateBook=function(req, res, next) {
             if(err){console.log(err);};
             res.render('entry',{
                 title: 'X Read',
+                _id:s_user._id,
                 name:user.name,
                 src:user.image,
                 admin:user.admin,

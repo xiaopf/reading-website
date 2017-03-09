@@ -9,6 +9,11 @@ module.exports=function(app){
 	app.get('/index', User.loggedIn, Book.index);
     app.get('/user/:name', User.loggedIn, User.user);
 	app.get('/detail/:id', User.loggedIn, Book.detail);
+	app.get('/search', User.loggedIn, Book.search);
+
+	app.post('/addDiscuss', User.loggedIn, Book.addDiscuss);
+	app.get('/upadateLike', User.loggedIn, Book.upadateLike);
+	app.get('/upadateUnlike', User.loggedIn, Book.upadateUnlike);
 
 	app.get('/admin/entry', User.loggedIn, User.adminR, Book.entry);		
 	app.get('/admin/bookList', User.loggedIn, User.adminR, Book.bookList);

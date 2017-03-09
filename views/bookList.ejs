@@ -17,7 +17,6 @@
 						<td class="h4">author</td>
 						<td class="h4">rating</td>
 						<td class="h4">publisher</td>
-						
 						<td class="h4">isbn13</td>
 						<td class="h4">operate</td>
 					</tr>
@@ -35,8 +34,8 @@
                       	
                       	<td><%=book.isbn13 %></td>
                       	<td>
-	                      	<a href="/admin/bookList/updateBook/<%=book.id %>" type="button" class="update operate btn btn-success">update</a>
-	                      	<button bookId="<%=book.id %>" type="button" class="delete operate btn btn-danger">delete</button>
+	                      	<a href="/admin/bookList/updateBook/<%=book.id %>" type="button" class="update operate btn btn-success"><span class="glyphicon glyphicon-upload"></span>&nbsp udt</a>
+	                      	<button bookId="<%=book.id %>" type="button" class="delete operate btn btn-danger"><span class="glyphicon glyphicon-trash"></span>&nbsp del</button>
                       	</td>
                       </tr>
 

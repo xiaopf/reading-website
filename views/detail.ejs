@@ -5,8 +5,10 @@
 
 
 <div class="container">
+
 	<div class="row">
-		<h1 class="col-md-12"><%=book.title %></h1>
+		<h1 id="bookTitle" _id="<%= book._id%>" class="col-md-12"><%=book.title %></h1>
+	</div>
     <div class="row">
 		<div class="col-md-3 col-md-offset-1">
 			<a href="<%=book.image %>"><img class="img_size" src="<%=book.large_image %>"></a>
@@ -20,15 +22,88 @@
 			<p>装帧:<%=book.binding %></p>
 		</div>
 
+
 		<div class="col-md-12">
-			<p>内容简介  · · · · · ·</p>
+			<h3 class="title">内容简介  · · · · · ·</h3>
 			<p><%=book.author_intro %></p>
 		</div>
 		<div class="col-md-12">
-			<p>作者简介  · · · · · · </p>
+			<h3 class="title">作者简介  · · · · · · </h3>
 			<p><%=book.summary %></p>
 		</div>
 	</div>
+
+	<h3 class="title discuss_title">评价：</h3>
+	<div id="discuss" class="discuss col-md-12">
+	    <div class="reply_input">
+	        <textarea name="reply_content" id="reply_content" class="reply_content" placeholder="回复："></textarea>
+		    <button type="button" id="reply_btn" class="send btn btn-primary">发送</button>
+		</div>
+
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                <h4 class="modal-title" id="myModalLabel">回复</h4>
+		            </div>
+		            <div class="reply_input modal-body">
+	                    <textarea id="modal_reply_con" name="reply_content" class=" reply_content" placeholder="回复："></textarea>
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		                <button id="modal_reply_btn"  type="button" data-dismiss="modal" class=" btn btn-primary">发送</button>
+		            </div>
+		        </div>
+		    </div>
+		</div>  
+
+
+		<div class="content" id="content">
+
+
+        <%if(discusses[0]){discusses.forEach(function(item){%>
+
+               <div class="item">
+	               	<img src="<%= item.reply_from_id.image %>" class="r_head_pic">
+	               	<div class="r_name_con">
+	                	<a href="#"><%= item.reply_from_id.name %></a>
+
+	                	<%if(item.reply_to_id){%>
+		                	&nbsp回复：<a href="#"><%= item.reply_to_id.name %></a>
+	                	<%}%>
+
+	                 	<p class="r_content"><%= item.reply_content%></p>              		
+		               	<div class="r_info">
+		               		<p class="time"><%= item.createdAt.toLocaleString()%></p>&nbsp
+
+		               		<button type="button" class="r_btn" _id="<%= item.reply_from_id._id%>" name="<%= item.reply_from_id.name%>"  data-toggle="modal" data-target="#myModal">
+			               		<span class="glyphicon glyphicon-share-alt "></span>&nbsp回复
+		               		</button>
+
+		               		<button type="button" class="z_btn" discuss_id="<%= item._id%>" z_toggle='z'>
+			               		<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp<span class="z">赞</span>	
+		               		</button>
+
+		               		<button type="button" class="c_btn" discuss_id="<%= item._id%>" c_toggle='c'>
+			               		<span class="glyphicon glyphicon-thumbs-down"></span>&nbsp<span class="c">踩</span>
+		               		</button>
+
+                            <div class="z_c">
+	   		               		<p class="z_con"><span class="z_count"><span class="like_count"><%=item.like_count %></span></span>&nbsp赞</p>&nbsp/
+			               		<p class="c_con"><span class="c_count"><span class="unlike_count"><%=item.unlike_count %></span></span>&nbsp踩</p>                         	
+                            </div>
+
+		               	</div>
+	               	</div>
+               </div>
+
+		<%})}%>
+			
+  
+
+
+		</div>
 	</div>
 </div>
 
