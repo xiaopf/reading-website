@@ -17,6 +17,9 @@ Date.prototype.Format = function (fmt) { //author: meizz
 }
 
 
+
+
+
 	let book_id =$('#bookTitle').attr('_id');
 	let from_id =$('#header_a').attr('_id');
 
@@ -29,21 +32,6 @@ Date.prototype.Format = function (fmt) { //author: meizz
 
 		let r_con = $('#reply_content').val();
 
-        $('#content')[0].innerHTML+=
-        '<div class="item">'+
-	        '<img src="'+src+'" class="r_head_pic"><div class="r_name_con"><a href="#">'+name +'</a><p class="r_content">'+r_con+'</p>'+	
-		        '<div class="r_info"><p class="time">'+new Date().Format("yyyy-MM-dd hh:mm:ss")+'</p>&nbsp'+
-			        '<button type="button" class="r_btn" _id="'+from_id+'" name="'+name +'"  data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-share-alt"></span>&nbsp回复</button>'+
-			        '<button type="button" class="z_btn"><span class="glyphicon glyphicon-thumbs-up"></span>&nbsp赞</button>'+
-			        '<button type="button" class="c_btn"><span class="glyphicon glyphicon-thumbs-down"></span>&nbsp踩</button>'+
-			        '<div class="z_c">'+
-	               		'<p class="z_con"><span class="z_count">11</span>&nbsp赞</p>'+
-	               		'<p class="c_con"><span class="c_count">11</span>&nbsp踩</p>'+                         	
-                    '</div>'+
-		        '</div>'+
-	        '</div>'+
-        '</div>';
-		
 		$.ajax({
 			type:'post',
 			data:{
@@ -52,42 +40,58 @@ Date.prototype.Format = function (fmt) { //author: meizz
 				'reply_content':r_con,
 			},
 			url:'http://localhost:3000/addDiscuss',
+			success:function(discuss_id){	
+                  
+			        $('#content')[0].innerHTML+=
+			        '<div class="item new">'+
+				        '<img src="'+src+'" class="r_head_pic"><div class="r_name_con"><a href="#">'+name +'</a><p class="r_content">'+r_con+'</p>'+	
+					        '<div class="r_info"><p class="time">'+new Date().Format("yyyy-MM-dd hh:mm:ss")+'</p>&nbsp'+
+						        '<button type="button" class="r_btn" _id="'+from_id+'" name="'+name +'"  data-toggle="modal" data-target="#myModal">&nbsp<span class="glyphicon glyphicon-share-alt"></span>&nbsp回复</button>'+
+						        
+						        '<button type="button" class="z_btn" discuss_id="'+discuss_id+'" z_toggle="z">'+
+							        '<span class="glyphicon glyphicon-thumbs-up"></span><span class="z">&nbsp赞&nbsp</span>	'+
+						        '</button>'+
+
+						        '<button type="button" class="c_btn" discuss_id="'+discuss_id+'" c_toggle="c">'+
+				               		'<span class="glyphicon glyphicon-thumbs-down"></span><span class="c">&nbsp踩&nbsp</span>'+
+			               		'</button>'+
+
+			               		'<button type="button" class="d_btn" discuss_id="<%= item._id%>">'+
+				               		'<span class="glyphicon glyphicon-trash"></span><span class="c">&nbsp删除</span>'+
+			               		'</button>'+
+
+
+								'<div class="z_c">'+
+								   		'<p class="z_con"><span class="z_count"><span class="like_count">0</span></span>&nbsp赞</p>&nbsp/&nbsp'+
+										'<p class="c_con"><span class="c_count"><span class="unlike_count">0</span></span>&nbsp踩</p>'+                       	
+								'</div>'+
+
+					        '</div>'+
+				        '</div>'+
+			        '</div>';
+			}
 		});
+
 		$('#reply_content').val('');
 	});
 
 
 
 
-	$('.r_btn').click(function(){
+	$('#content').on('click','.r_btn',function(){
+		
 		to_id =$(this).attr('_id');
 		to_name =$(this).attr('name');
+
+		$('#myModalLabel')[0].innerHTML='回复：'+to_name;
+
+
 	});
 
 	$('#modal_reply_btn').click(function(){
 		
 		let r_con   =$('#modal_reply_con').val();
 
-        $('#content')[0].innerHTML+=
-		'<div class="item">'+
-		    '<img src="'+src+'" class="r_head_pic">'+
-		    '<div class="r_name_con">'+
-		        '<a href="#">'+name +'</a>&nbsp回复：<a href="#">'+to_name+'</a>'+
-		        '<p class="r_content">'+r_con+'</p>	'+
-		        '<div class="r_info">'+
-			        '<p class="time">'+new Date().Format("yyyy-MM-dd hh:mm:ss")+'</p>&nbsp'+
-			        '<button type="button" class="r_btn"_id="'+from_id+'" name="'+name+'"  data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-share-alt"></span>&nbsp回复</button>'+
-			        '<button type="button" class="z_btn"><span class="glyphicon glyphicon-thumbs-up"></span>&nbsp赞</button>'+
-			        '<button type="button" class="c_btn"><span class="glyphicon glyphicon-thumbs-down"></span>&nbsp踩</button>'+
-			        '<div class="z_c">'+
-	               		'<p class="z_con"><span class="z_count">11</span>&nbsp赞</p>'+
-	               		'<p class="c_con"><span class="c_count">11</span>&nbsp踩</p>'+                         	
-                    '</div>'+
-		        '</div>'+
-		    '</div>'+
-		'</div>';
-
-		
 		$.ajax({
 			type:'post',
 			data:{
@@ -97,6 +101,38 @@ Date.prototype.Format = function (fmt) { //author: meizz
 				'reply_content':r_con,
 			},
 			url:'http://localhost:3000/addDiscuss',
+			success:function(discuss_id){
+			        $('#content')[0].innerHTML+=
+					'<div class="item">'+
+					    '<img src="'+src+'" class="r_head_pic">'+
+					    '<div class="r_name_con">'+
+					        '<a href="#">'+name +'</a>&nbsp&nbsp回复：<a href="#">'+to_name+'</a>'+
+					        '<p class="r_content">'+r_con+'</p>	'+
+					        '<div class="r_info">'+
+						        '<p class="time">'+new Date().Format("yyyy-MM-dd hh:mm:ss")+'</p>&nbsp'+
+						        '<button type="button" class="r_btn" _id="'+from_id+'" name="'+name +'"  data-toggle="modal" data-target="#myModal">&nbsp<span class="glyphicon glyphicon-share-alt"></span>&nbsp回复</button>'+
+						        
+						        '<button type="button" class="z_btn" discuss_id="'+discuss_id+'" z_toggle="z">'+
+							        '<span class="glyphicon glyphicon-thumbs-up"></span><span class="z">&nbsp赞&nbsp</span>	'+
+						        '</button>'+
+
+						        '<button type="button" class="c_btn" discuss_id="'+discuss_id+'" c_toggle="c">'+
+				               		'<span class="glyphicon glyphicon-thumbs-down"></span><span class="c">&nbsp踩&nbsp</span>'+
+			               		'</button>'+
+
+			               		'<button type="button" class="d_btn" discuss_id="<%= item._id%>">'+
+				               		'<span class="glyphicon glyphicon-trash"></span><span class="c">&nbsp删除</span>'+
+			               		'</button>'+
+
+								'<div class="z_c">'+
+								   		'<p class="z_con"><span class="z_count"><span class="like_count">0</span></span>&nbsp赞</p>&nbsp/&nbsp'+
+										'<p class="c_con"><span class="c_count"><span class="unlike_count">0</span></span>&nbsp踩</p>'+                       	
+								'</div>'+
+
+					        '</div>'+
+					    '</div>'+
+					'</div>';
+			}
 		});
 
 		$('#modal_reply_con').val('');
@@ -104,65 +140,89 @@ Date.prototype.Format = function (fmt) { //author: meizz
 
 
 
-	$('.z_btn').click(function(){
-		let _id=$(this).attr('discuss_id');
-		let count=parseInt($('.like_count').html());
+	$('#content').on('click','.z_btn',function(){
+
+		let discuss_id=$(this).attr('discuss_id');
+		let count=parseInt($(this).siblings('.z_c').find('.like_count').html());
+
+		let from_id_arr;
 
 		if($(this).attr('z_toggle')=='z'){
             count++;
-			$('.like_count').html(count);
-	        $(this).find('.z').html('取消赞');	
+            from_id_arr=['push',from_id]
+			$(this).siblings('.z_c').find('.like_count').html(count);
+	        $(this).find('.z').html('&nbsp取消赞');	
 	        $(this).attr('z_toggle','nz')		
 		}else{
             count--;
-			$('.like_count').html(count);
-			$(this).find('.z').html('赞');
+            from_id_arr=['remove',from_id]
+			$(this).siblings('.z_c').find('.like_count').html(count);
+			$(this).find('.z').html('&nbsp赞');
 			$(this).attr('z_toggle','z')
-		}
-
-
+		};
 
 		$.ajax({
 			type:'get',
 			data:{
-				_id:_id,
+				discuss_id:discuss_id,
 				count:count,
+				from_id_arr:from_id_arr,
 			},
 			url:'http://localhost:3000/upadateLike',
-		})
+		});
 
 	});
 
-	$('.c_btn').click(function(){
-		let _id=$(this).attr('discuss_id');
-        let count=parseInt($('.unlike_count').html());
+
+
+	$('#content').on('click','.c_btn',function(){
+
+		let discuss_id=$(this).attr('discuss_id');
+        let count=parseInt($(this).siblings('.z_c').find('.unlike_count').html());
+        let from_id_arr;
 
 		if($(this).attr('c_toggle')=='c'){
             count++;
-			$('.unlike_count').html(count);
-	        $(this).find('.c').html('取消踩');	
+            from_id_arr=['push',from_id]
+			$(this).siblings('.z_c').find('.unlike_count').html(count);
+	        $(this).find('.c').html('&nbsp取消踩');	
 	        $(this).attr('c_toggle','nc')	  
 		}else{
             count--;
-			$('.unlike_count').html(count);
-			$(this).find('.c').html('踩');
+            from_id_arr=['remove',from_id]
+			$(this).siblings('.z_c').find('.unlike_count').html(count);
+			$(this).find('.c').html('&nbsp踩');
 			$(this).attr('c_toggle','c')
-		}
-
-
+		};
 
 		$.ajax({
 			type:'get',
 			data:{
-				_id:_id,
+				discuss_id:discuss_id,
 				count:count,
+				from_id_arr:from_id_arr,
 			},
 			url:'http://localhost:3000/upadateUnlike',
-		})
+		});
 
 	});
 
 
+	$('#content').on('click','.d_btn',function(){
+		let discuss_id=$(this).attr('discuss_id');
+
+		if(confirm('Are you sure?')){
+			$(this).parent().parent().parent().remove();
+			$.ajax({
+				type:'delete',
+				data:{discuss_id:discuss_id,},
+				url:'http://localhost:3000/deleteDiscuss',
+				success:function(data){
+					console.log(data)
+				}
+			})
+		}
+	})
 })
 
 

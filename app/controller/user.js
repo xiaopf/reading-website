@@ -40,7 +40,7 @@ exports.sign=function(req, res, next) {
 };
 
 exports.user=function(req, res, next) {
-    
+    var s_user=req.session.user;
     var p_name=req.params.name;
 
     User.findOne({name:p_name},function(err,user){

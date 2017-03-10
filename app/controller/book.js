@@ -1,16 +1,60 @@
 var Book=require('../model/book.js');
 var User=require('../model/user.js');
 var Discuss=require('../model/discuss.js');
+var moment=require('moment');
 
 exports.index=function(req, res, next) {
     var s_user=req.session.user;
 
-    Book.find({},function(err,books){
+    Book.find({}).exec(function(err,books){
+        if(err){console.log(err);};
+        User.findById(s_user._id,function(err,user){
+            if(err){console.log(err);};
+            if(books[0]){
+                res.render('index', {
+                  via: 'no_sort',
+                  title: 'X Read',
+                  _id:s_user._id,
+                  name:user.name,
+                  src:user.image,
+                  admin:user.admin,
+                  books:books,
+                });      
+            };
+        });
+    });
+};
+exports.indexT=function(req, res, next) {
+    var s_user=req.session.user;
+
+    Book.find({}).sort({"pubdate":1}).exec(function(err,books){
         if(err){console.log(err);};
         User.findById(s_user._id,function(err,user){
             if(err){console.log(err);};
             if(books[0]){
                 res.render('index', { 
+                  via:'t_sort',
+                  title: 'X Read',
+                  _id:s_user._id,
+                  name:user.name,
+                  src:user.image,
+                  admin:user.admin,
+                  books:books,
+                });      
+            };
+        });
+    });
+};
+exports.indexR=function(req, res, next) {
+    var s_user=req.session.user;
+
+    Book.find({}).sort({"rating.average":-1}).exec(function(err,books){
+        if(err){console.log(err);};
+        User.findById(s_user._id,function(err,user){
+            if(err){console.log(err);};
+            if(books[0]){
+                res.render('index', { 
+                  via:'r_sort',
                   title: 'X Read',
                   _id:s_user._id,
                   name:user.name,
@@ -54,64 +98,85 @@ exports.detail=function(req, res, next) {
 
 
 exports.addDiscuss=function(req,res){
-  var discuss=new Discuss(req.body);
-  discuss.save(function(err){
-    if (err) {console.error(err);};
-  })
+    var discuss=new Discuss(req.body);
+    discuss.save(function(err,discuss){
+        if (err) {console.error(err);};
+        res.send(discuss._id);
+    });
 }
 
+exports.deleteDiscuss=function(req,res){
+    var b_discuss_id=req.body.discuss_id;
+    Discuss.remove({_id:b_discuss_id},function(err,discuss){
+        if (err) {console.error(err);};
+        res.end('delete successful!');
+    });
+};
 
 
 
 exports.upadateLike=function(req,res){
-  var q_id=req.query._id;
-  var q_count=req.query.count;
+    console.log(req.query)
+    var q_discuss_id  =req.query.discuss_id;
+    var q_count       =req.query.count;
+    var q_from_id_arr =req.query.from_id_arr;
 
-  Discuss.findById(q_id,function(err,discuss){
-    discuss.like_count=q_count;
-    let _id=discuss._id;
-    delete discuss._id;
-    Discuss.update({_id:_id},discuss,function(err){
-      if (err) {console.error(err);};
+    Discuss.findById(q_discuss_id,function(err,discuss){
+        discuss.like_count=q_count;
+        if(q_from_id_arr[0]=='push'){
+            discuss.like_id_list.push(q_from_id_arr[1]);
+        }else if(q_from_id_arr[0]=='remove'){
+            discuss.like_id_list.remove(q_from_id_arr[1]);
+        };
+
+        let _id=discuss._id;
+        delete discuss._id;
+        Discuss.update({_id:_id},discuss,function(err){
+          if (err) {console.error(err);};
+        });
     });
-  });
-}
+};
 
 exports.upadateUnlike=function(req,res){
-  var q_id=req.query._id;
-  var q_count=req.query.count;
+    var q_discuss_id  =req.query.discuss_id;
+    var q_count       =req.query.count;
+    var q_from_id_arr =req.query.from_id_arr;
 
-  Discuss.findById(q_id,function(err,discuss){
-    discuss.unlike_count=q_count;
-    let _id=discuss._id;
-    delete discuss._id;
-    Discuss.update({_id:_id},discuss,function(err){
-      if (err) {console.error(err);};
+    Discuss.findById(q_discuss_id,function(err,discuss){
+        discuss.unlike_count=q_count;
+        if(q_from_id_arr[0]=='push'){
+          discuss.unlike_id_list.push(q_from_id_arr[1]);
+        }else if(q_from_id_arr[0]=='remove'){
+          discuss.unlike_id_list.remove(q_from_id_arr[1]);
+        };
+        let _id=discuss._id;
+        delete discuss._id;
+        Discuss.update({_id:_id},discuss,function(err){
+            if (err) {console.error(err);};
+        });
     });
-  });
-
-}
+};
 
 
 exports.search=function(req,res){
-  var s_user=req.session.user;
-  var sc=req.query.search_content;
+    var s_user=req.session.user;
+    var sc=req.query.search_content;
 
-  Book.find({
-      $or:[{'title':new RegExp('.*'+sc+'.*','i')},{'author.0':new RegExp('.*'+sc+'.*','i')},{'isbn13':sc}]
-  },function(err,books){
-      User.findById(s_user._id,function(err,user){
-        if(err){console.log(err);};
-        res.render('search',{
-              title: 'X Read',
-              name:user.name,
-              _id:s_user._id,
-              src:user.image,
-              admin:user.admin,
-              books:books,
+    Book.find({
+        $or:[{'title':new RegExp('.*'+sc+'.*','i')},{'author.0':new RegExp('.*'+sc+'.*','i')},{'isbn13':sc}]
+    },function(err,books){
+        User.findById(s_user._id,function(err,user){
+            if(err){console.log(err);};
+            res.render('search',{
+                title: 'X Read',
+                name:user.name,
+                _id:s_user._id,
+                src:user.image,
+                admin:user.admin,
+                books:books,
+            });
         });
-     });
-  });
+    });
 };
 
 

@@ -10,26 +10,52 @@
 		<h1 id="bookTitle" _id="<%= book._id%>" class="col-md-12"><%=book.title %></h1>
 	</div>
     <div class="row">
-		<div class="col-md-3 col-md-offset-1">
+		<div class="col-md-3 image_wrap">
 			<a href="<%=book.image %>"><img class="img_size" src="<%=book.large_image %>"></a>
 		</div>
-		<div class="col-md-3 col-md-offset-1">
-			<p>作者:<%=book.author %></p>
-			<p>译者:<%=book.translator %></p>
-			<p>出版年:<%=book.pubdate %></p>
-			<p>页数:<%=book.pages %></p>
-			<p>定价:<%=book.price %></p>
-			<p>装帧:<%=book.binding %></p>
+		<div class="col-md-4">
+			<p>作者：<%=book.author %></p>
+            <%if(book.translator[0]){%>
+			<p>译者：<%=book.translator %></p>
+			<%}%>
+			<p>出版年：<%=book.pubdate %></p>
+			<p>页数：<%=book.pages %></p>
+			<p>定价：<%=book.price %></p>
+			<p>装帧：<%=book.binding %></p>
+			<p>标签：<%=book.tags.join(' / ') %></p>
+		</div>
+
+		<div class="col-md-3 col-md-offset-1 rating_area">
+			<p>豆瓣评分</p>
+			<p class="rating_average">&nbsp<%=book.rating.average %></p>
+
+			<div>
+            <% var full= Math.floor ( book.rating.average / 2 );
+	           var half= Math.floor ( book.rating.average % 2 );
+               if(half>=1.5){full++;}else if(half>=1){half=1;}else{half=0;}
+               var grey=5-full-half;
+            %>
+            <%for(var i=0 ; i<full ; i++){%>
+			   <img src="/images/full_star.png" class="rating_star">
+            <%}%>
+            <%for(var i=0 ; i<half ; i++){%>
+			   <img src="/images/half_star.png" class="rating_star">
+            <%}%>
+            <%for(var i=0 ; i<grey ; i++){%>
+			   <img src="/images/grey_star.png" class="rating_star">
+            <%}%>
+			</div>
+
 		</div>
 
 
 		<div class="col-md-12">
 			<h3 class="title">内容简介  · · · · · ·</h3>
-			<p><%=book.author_intro %></p>
+			<p><%=book.summary %></p>
 		</div>
 		<div class="col-md-12">
 			<h3 class="title">作者简介  · · · · · · </h3>
-			<p><%=book.summary %></p>
+			<p><%=book.author_intro %></p>
 		</div>
 	</div>
 
@@ -75,23 +101,90 @@
 
 	                 	<p class="r_content"><%= item.reply_content%></p>              		
 		               	<div class="r_info">
-		               		<p class="time"><%= item.createdAt.toLocaleString()%></p>&nbsp
+
+							<% Date.prototype.Format = function (fmt) { //author: meizz 
+							    var o = {
+							        "M+": this.getMonth() + 1, //月份 
+							        "d+": this.getDate(), //日 
+							        "h+": this.getHours(), //小时 
+							        "m+": this.getMinutes(), //分 
+							        "s+": this.getSeconds(), //秒 
+							        "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+							        "S": this.getMilliseconds() //毫秒 
+							    };
+							    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+							    for (var k in o)
+							    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+							    return fmt;
+							}%>
+
+		               		<p class="time"><%= item.createdAt.Format("yyyy-MM-dd hh:mm:ss")%></p>&nbsp
 
 		               		<button type="button" class="r_btn" _id="<%= item.reply_from_id._id%>" name="<%= item.reply_from_id.name%>"  data-toggle="modal" data-target="#myModal">
-			               		<span class="glyphicon glyphicon-share-alt "></span>&nbsp回复
+			               		<span class="glyphicon glyphicon-share-alt "></span>
+			               		<span>
+			               		回复
+			               		</span>
 		               		</button>
 
-		               		<button type="button" class="z_btn" discuss_id="<%= item._id%>" z_toggle='z'>
-			               		<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp<span class="z">赞</span>	
-		               		</button>
+		               		<%if(item.like_id_list.indexOf(_id)==-1){%>
 
-		               		<button type="button" class="c_btn" discuss_id="<%= item._id%>" c_toggle='c'>
-			               		<span class="glyphicon glyphicon-thumbs-down"></span>&nbsp<span class="c">踩</span>
-		               		</button>
+			               		<button type="button" class="z_btn" discuss_id="<%= item._id%>" z_toggle="z">
+				               		<span class="glyphicon glyphicon-thumbs-up"></span><span class="z">
+				               		赞
+				               		</span>	
+			               		</button>
 
+			               	<%}else{%>
+
+								<button type="button" class="z_btn" discuss_id="<%= item._id%>" z_toggle="nz">
+				               		<span class="glyphicon glyphicon-thumbs-up"></span><span class="z">
+				               		取消赞
+			               			</span>	
+			               		</button>
+
+			               	<%}%>
+
+		               		
+		               		<%if(item.unlike_id_list.indexOf(_id)==-1){%>
+
+								<button type="button" class="c_btn" discuss_id="<%= item._id%>" c_toggle="c">
+				               		<span class="glyphicon glyphicon-thumbs-down"></span><span class="c">
+									踩
+									</span>
+			               		</button>
+				               		
+		               		<%}else{%>
+
+			               		<button type="button" class="c_btn" discuss_id="<%= item._id%>" c_toggle="nc">
+				               		<span class="glyphicon glyphicon-thumbs-down"></span><span class="c">
+									取消踩
+									</span>
+			               		</button>
+				               		
+		               		<%}%>
+
+
+		               		<%if(item.reply_from_id._id==_id){%>
+
+								<button type="button" class="d_btn" discuss_id="<%= item._id%>">
+				               		<span class="glyphicon glyphicon-trash"></span><span class="c">
+				               		删除
+				               		</span>
+			               		</button>
+				               		
+		               		<%}%>
+
+			               		
                             <div class="z_c">
-	   		               		<p class="z_con"><span class="z_count"><span class="like_count"><%=item.like_count %></span></span>&nbsp赞</p>&nbsp/
-			               		<p class="c_con"><span class="c_count"><span class="unlike_count"><%=item.unlike_count %></span></span>&nbsp踩</p>                         	
+	   		               		<p class="z_con"><span class="z_count"><span class="like_count"><%=item.like_count %></span>
+	   		               		赞
+	   		               		</span>
+	   		               		</p>&nbsp/
+			               		<p class="c_con"><span class="c_count"><span class="unlike_count"><%=item.unlike_count %></span>
+			               		踩
+			               		</span>
+			               		</p>                         	
                             </div>
 
 		               	</div>

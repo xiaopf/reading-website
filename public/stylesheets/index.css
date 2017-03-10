@@ -1,19 +1,39 @@
 
+.sort{
+	text-align:right; 
+	padding-top:10px;
+	padding-bottom: 4px;
+	border-bottom: 1px dashed grey;
+}
+
+.active{
+	color: grey
+}
+
+
 .book{
 		display: inline-block;
 		width: 270px;
-		margin:10px 5px 10px 5px;
+		margin:15px 5px 15px 5px;
 }
+
+
 .bk_rating{
 	color: rgb(224, 144, 21);
 }
+.clearfix{
+	height: 150px;
+}
+
+
 .book p{
-		margin-bottom:5px;
+		margin-bottom:4px;
 }
 .bk_pic{
 		padding: 0;
 		float: left;
 		width: 100px;
+		max-height: 140px;
 		padding: 5px;
 }
 .bk_p{

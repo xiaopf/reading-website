@@ -3,6 +3,10 @@ body{
     	background-color: #feeeed;
     }
 
+nav{
+        height: 52px;
+}
+
 a:focus {
 		outline:none; 
 		-moz-outline:none;

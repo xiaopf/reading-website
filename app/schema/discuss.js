@@ -29,7 +29,8 @@ var DiscussSchema=new Schema({
 	},
 
 
-	// like_id_list:Array,
+	like_id_list:Array,
+	unlike_id_list:Array,
 
 	createdAt:Date,
 

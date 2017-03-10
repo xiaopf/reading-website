@@ -1,11 +1,30 @@
 
+#bookTitle{
+	margin:30px 10px
+}
 .title{
 	color:rgb(0, 119, 34);
 	padding-bottom: 5px;
 }
+.image_wrap{
+	margin-left: 30px;
+	margin-bottom: 30px;
+}
 .img_size{
         width: 160px;
 
+}
+.rating_star{
+	background-color: transparent;
+	width: 18px;
+}
+.rating_average{
+	font-size:30px;
+	color:rgb(224, 144, 21);
+}
+
+.rating_area{
+	border-left: 1px dotted grey;
 }
 .discuss{
     padding-bottom: 100px;
@@ -13,6 +32,7 @@
 .reply_content{
 	width: 100%;
 	height:100px;
+	font-size: 18px;
 }
 .discuss_title{
 	padding-bottom: 10px;
@@ -54,7 +74,8 @@
 .time,
 .r_btn,
 .z_btn,
-.c_btn{
+.c_btn,
+.d_btn{
 	display: inline-block;
 	margin:5px;
 }
