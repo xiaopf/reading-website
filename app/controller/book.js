@@ -174,6 +174,7 @@ exports.search=function(req,res){
                 src:user.image,
                 admin:user.admin,
                 books:books,
+                sc:sc,
             });
         });
     });

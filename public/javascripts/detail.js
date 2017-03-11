@@ -72,17 +72,12 @@ $(document).ready(function(){
 		$('#reply_content').val('');
 	});
 
-
-
-
 	$('#content').on('click','.r_btn',function(){
 		
 		to_id =$(this).attr('_id');
 		to_name =$(this).attr('name');
 
 		$('#myModalLabel')[0].innerHTML='回复：'+to_name;
-
-
 	});
 
 	$('#modal_reply_btn').click(function(){
@@ -216,7 +211,7 @@ $(document).ready(function(){
 				url:'http://localhost:3000/deleteDiscuss',
 				success:function(data){
 					console.log(data)
-				};
+				},
 			});
 		};
 	});

@@ -1,3 +1,15 @@
+.search_what{
+   margin:20px 0;
+   font-size: 26px;
+   padding-bottom: 5px;
+   border-bottom: 1px dashed grey;
+   width: 93%;
+}
+
+.search_what span{
+	font-style: italic;
+	color: #4c689b;
+}
 
 .book{
 		display:block;
