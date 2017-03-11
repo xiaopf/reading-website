@@ -30,9 +30,10 @@
 			<p class="rating_average">&nbsp<%=book.rating.average %></p>
 
 			<div>
-            <% var full= Math.floor ( book.rating.average / 2 );
-	           var half= Math.floor ( book.rating.average % 2 );
-               if(half>=1.5){full++;}else if(half>=1){half=1;}else{half=0;}
+            <% var full= Math.floor ( parseFloat(book.rating.average) / 2 );
+	           var remain= parseFloat(book.rating.average) % 2 ;
+
+               if(remain>=1.5){full++;half=0;}else if(remain>=1){half=1;}else{half=0;}
                var grey=5-full-half;
             %>
             <%for(var i=0 ; i<full ; i++){%>
