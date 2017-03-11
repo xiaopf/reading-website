@@ -7,7 +7,7 @@
 	<div class="row">
 		<div class="col-md-12 table-resposive">
 			<table class="table table-bordered">
-				<caption><h2>BOOK LIST</h2></caption>
+				<caption><h1>BOOK LIST</h1></caption>
 				<thead>
 					<tr>
 						<td class="h4">index</td>
@@ -34,8 +34,12 @@
                       	
                       	<td><%=book.isbn13 %></td>
                       	<td>
-	                      	<a href="/admin/bookList/updateBook/<%=book.id %>" type="button" class="update operate btn btn-success"><span class="glyphicon glyphicon-upload"></span>&nbsp up</a>
-	                      	<button bookId="<%=book.id %>" type="button" class="delete operate btn btn-danger"><span class="glyphicon glyphicon-trash"></span>&nbsp del</button>
+	                      	<a href="/admin/bookList/updateBook/<%=book.id %>" type="button" class="update operate btn btn-success"><span class="glyphicon glyphicon-upload"></span>
+	                      	update
+	                      	</a>
+	                      	<button bookId="<%=book.id %>" type="button" class="delete operate btn btn-danger"><span class="glyphicon glyphicon-trash"></span>
+	                      	delete
+	                      	</button>
                       	</td>
                       </tr>
 
@@ -43,7 +47,6 @@
 				</tbody>
 			</table>
 		</div>
-	
 	</div>
 </div>
 

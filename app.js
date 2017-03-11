@@ -36,7 +36,9 @@ app.use(session({
 	store:new MongoStore({
 		url:dbUrl,
 	    collection:'sessions'
-	})
+	}),
+  resave:false,
+  saveUninitialized:true
 }));
 
 

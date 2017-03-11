@@ -1,4 +1,12 @@
-.col-md-2{
+.box{
+	margin-top: 30px;
+}
+
+.pa{
 	margin-top: 6px;
+}
+
+.pa_btn{
+    width: 100px;
 }
 

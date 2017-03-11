@@ -7,7 +7,7 @@
 	<div class="row">
 		<div class="col-md-12 table-resposive">
 			<table class="table table-bordered">
-				<caption><h2>USER LIST</h2></caption>
+				<caption><h1>USER LIST</h1></caption>
 				<thead>
 					<tr>
 						<td class="h4">index</td>
@@ -24,27 +24,24 @@
 					<% users.forEach(function(user,index){%>
                       <tr >
                       	<td class="h4"><%=index+1 %></td>
-
-                
                       	<td>        
 	                      <img class="img_size" src="<%=user.image %>" alt="">
                       	</td>
-
                       	<td><%=user.name %></td>
                       	<td><%=user.admin %></td>
                       	<td><%=user.sex %></td>
                       	<td><%=user.email %></td>
-              	
                       	<td>
                       	    <%=user.createdAt.toLocaleString() %>
                       	    <br>
                       	    <%=user.updatedAt.toLocaleString() %>	
                       	</td>
                       	<td>
-	                      	<button User="<%=user.name %>"  type="button" class="delete operate btn btn-danger"><span class="glyphicon glyphicon-trash"></span>&nbsp del</button>
+	                      	<button User="<%=user.name %>"  type="button" class="delete operate btn btn-danger"><span class="glyphicon glyphicon-trash"></span>
+	                      	delete
+	                      	</button>
                       	</td>
                       </tr>
-
 					<%})%>
 				</tbody>
 			</table>

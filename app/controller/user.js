@@ -105,14 +105,12 @@ exports.signup=function(req, res) {
    User.find({name:b_name},function(err,user){
        if(err){console.log(err);};
 
-       if(user[0]){
-       	    res.end('name is already taken!');
-       }else{
+       if(!user[0]){
        	    var user=new User(req.body);
-    		    user.save(function (err, user) {
-        			  if (err) {console.error(err);};
-        			  res.redirect('/');
-    			  });
+		    user.save(function (err, user) {
+    			  if (err) {console.error(err);};
+			});
+            res.send('Signup successful,please signin!');
        };
    }); 
 };
@@ -152,10 +150,14 @@ exports.logout=function(req, res, next) {
 
 exports.deleteUser=function(req, res, next) {
     var b_name=req.body.name;
-    User.remove({name:b_name},function(err,user){
-        if(err){console.log(err);};      
-        res.end('delete successful!');
+    User.remove({'name':b_name},function(err,user){
+        if(err){console.log(err);}; 
+        if(user){
+            res.end('delete successful!');            
+        }  
+  
     });
+    
 };
 
 
@@ -169,17 +171,17 @@ exports.updateUser=function(req, res, next) {
     User.findById(b_user._id,function(err,user){
         if(err){console.log(err);};
 
+        var _id=user._id;
+        delete user._id;
+
         for(let key in b_user){
             user[key]=b_user[key];
         };
         user.updatedAt=Date();
 
-        var _id=user._id;
-        delete user._id;
-
         User.update({_id:_id},user,function(err){
             if(err){console.log(err);};
-            res.redirect('/user/'+user.name);
+            res.end('save successful!');
         });
     });   
 };

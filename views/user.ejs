@@ -1,13 +1,12 @@
 
 <% include header.ejs%>
+
 <link rel='stylesheet' href='/stylesheets/user.css' />
 <script src='/javascripts/user.js'></script>
 
-<iframe id='ifm' name='ifm'  src="about:blank" style="display:none"/>
-</iframe>
+<iframe id='ifm' name='ifm'  src="about:blank" style="display:none"/></iframe>
 
 <div class="container">
-   
     <div class="row">
 
 		<form id='formUI' action="/user/updateImage" enctype="multipart/form-data" method="post" target="ifm" >
@@ -19,10 +18,10 @@
 
 
 
-		<form id="form" class="form-horizontal" action="/user/updateUser" method="post">
 
+
+		<form id="form" class="form-horizontal">
             <a id="head_a_p">Upload new picture</a>
-
             <img id="head_pic" src="<%= user.image%>">
 
 		    <div class="form-group" style='display: none'>
@@ -43,7 +42,6 @@
 				<label class="col-md-2 control-lable" for="admin">admin</label>
 				<div class="col-md-2">
 				    <p><%= user.admin%></p>	
-
 				    <input style="display: none" id="admin" name="admin" class="form-control" type="text" value="<%= user.admin%>">
 				</div>
 			</div>
@@ -70,9 +68,7 @@
     		  		</label>				
 				</div>
 			</div>
-	
-			
-			
+
 			<div class="form-group">
 				<label class="col-md-2 control-lable" for="autograph">autograph</label>
 				<div class="col-md-10"> 
@@ -82,12 +78,13 @@
 			
 			<div class="form-group">
 				<div class="col-md-offset-2 col-md-10">
-				    <button id="save" name="save" class="form-control btn btn-primary" type="submit">保存</button>
+				    <button id="save" name="save" class="form-control btn btn-primary" type="button">保存</button>
 				</div>
 			</div>
 		</form>
 	</div>
 </div>
+
 <% include footer.ejs%>
 
 

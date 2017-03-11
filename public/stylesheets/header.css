@@ -1,5 +1,5 @@
 body{
-    	padding-top: 60px;
+    	padding-top: 52px;
     	background-color: #feeeed;
     }
 
@@ -7,31 +7,62 @@ nav{
         height: 52px;
 }
 
+nav .container{
+		width: 1000px;
+}
+
+.msg_wrap{
+	display: none;
+	position: fixed;
+	top:52px;
+	z-index: 11;
+	background-color: #83e483;
+	height:38px;
+	width: 100%;
+	text-align: left;
+	padding: 4px 0; 
+}
+
+#msg{
+	font-size: 20px;
+	line-height: 30px;
+	padding:0;
+	color: #72706b;
+	font-style: italic;
+}
+
 a:focus {
 		outline:none; 
 		-moz-outline:none;
 }
+
 .navbar-form{
 		margin:0;
 }
+
 .search_input{
 		height: 34px;
-		width: 180px;
+		width: 200px;
 }
+
 .search_btn{
 	    margin-right: 10px;
 }
+
 .header_pic{
 		margin-top: 10px;
 		width: 30px;
 		height:30px;
 }
+
 #header_a{
 	   padding: 0px;
 }
+
 .container{
 		width: 860px;
 }
+
 .logout{
 		background-color: transparent;
 		margin-top: 8px;

@@ -5,6 +5,7 @@
 .col-md-2{
 	margin-top: 6px;
 }
+
 #form{
 	position: relative;
 	margin-top: 60px;
@@ -18,11 +19,13 @@
 	top:10px;
 
 }
+
 #head_pic{
 	z-index: -1;
 	border:2px double grey ;
 	padding:5px; 
 }
+
 #head_a_p{
 	text-decoration: none;
 	font-size: 16px;

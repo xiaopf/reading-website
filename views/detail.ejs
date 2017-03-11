@@ -11,7 +11,7 @@
 	</div>
     <div class="row">
 		<div class="col-md-3 image_wrap">
-			<a href="<%=book.image %>"><img class="img_size" src="<%=book.large_image %>"></a>
+			<a href="<%=book.large_image %>"><img class="img_size" src="<%=book.large_image %>"></a>
 		</div>
 		<div class="col-md-4">
 			<p>作者：<%=book.author %></p>
@@ -84,13 +84,9 @@
 		    </div>
 		</div>  
 
-
 		<div class="content" id="content">
-
-
-        <%if(discusses[0]){discusses.forEach(function(item){%>
-
-               <div class="item">
+            <%if(discusses[0]){discusses.forEach(function(item){%>
+                <div class="item">
 	               	<img src="<%= item.reply_from_id.image %>" class="r_head_pic">
 	               	<div class="r_name_con">
 	                	<a href="#"><%= item.reply_from_id.name %></a>
@@ -190,12 +186,8 @@
 		               	</div>
 	               	</div>
                </div>
-
-		<%})}%>
-			
-  
-
-
+               
+		    <%})}%>
 		</div>
 	</div>
 </div>

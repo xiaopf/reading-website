@@ -9,108 +9,114 @@
 <script src='/javascripts/sign.js'></script>
 </head>
 <body>
+
+<div class="msg_wrap">
+	<div class="container">
+		<div class="col-md-12" id="msg"></div>
+	</div>
+</div>
+
 <canvas id="canvas"></canvas>
 	<div class="container">
 		<h1 class="text-center"><%= title %></h1>
 		<h4 class="text-center"><%= title2 %></h4>
 		
-
 		<div class="row">
 	    	<div class=" center-block nav_wid">
+
 		        <ul class="nav nav-pills">
 		        	<li class="active">
 			        	<a id="signupBtn" href="#signup">
 				        	signup
 			        	</a>
 		        	</li>
+
 		        	<li>
 			        	<a id="signinBtn" href="#signin">
 				        	signin
 			        	</a>
 		        	</li>
 		        </ul>
+
 		    </div>
+
 		    <hr>	
 		</div>
 
-	 
- 
-	    	<div id="signupPanel" class="panel panel-default  fade in active">
-	    	    <div class="panel-heading">
-	    	    	<div class="panel-title">signup</div>
-	    	    </div>
-	    		<form class="form-horizontal" method="post" action="/user/signup">
-		    		<div class="form-group">
-		    		  	<label for="name_up" class="col-md-2 control-label">name</label>
-		    		  	<div class="col-md-8 col-md-offset-1 parent">
-		    		  		<input type="text" class="form-control" id="name_up" name="name" onf=''>
-
-		    		  		<span id="name_tail"></span>
-		    		 
-		    		  		<div id="name_alert" class="alert alert-danger">
-							</div>
-		    		  	</div>
-		    		</div>
-
-		    		<div class="form-group">
-		    		  	<label class="col-md-2 control-label">sex</label>
-
-		    		  	<div class="col-md-8 col-md-offset-1 parent">
- 
-		    		  		<label class="checkbox-inline">
-		    		  		    <input type="radio" id="male" value="male" name="sex" checked=""><span class="sex_t">male</span>
-		    		  		    <input type="text" id="set_img" name="image" value="/images/male.png" style="display: none" >
-		    		  		</label>
-		
-		    		  		<label class="checkbox-inline">
-		    		  		    <input type="radio" id="female" value="female" name="sex"><span class="sex_t">female</span>
-		    		  		    
-		    		  		</label>	
-
-		    		  	</div>
-		    		</div>
-
-
-		    		<div class="form-group">
-		    		  	<label for="email_up" class="col-md-2 control-label">email</label>
-		    		  	<div class="col-md-8 col-md-offset-1">
-		    		  		<input type="email" class="form-control" id="email_up" name="email" onf=''>
-		    		  		<span id="email_tail"></span>
-
-		    		  		<div id="email_alert" class="alert alert-danger">
-							</div>
-		    		  	</div>
-
-		    		</div>
-		    		<div class="form-group">
-		    		  	<label for="password" class="col-md-2 control-label">password</label>
-		    		  	<div class="col-md-8 col-md-offset-1">
-		    		  		<input type="password" class="form-control" id="password_up" name="password">
-		    		  		<div id="password_alert" class="alert alert-danger">
-							</div>
-		    		  	</div>
-
-		    		</div>
-		    		<div class="form-group">
-		    		  	<div class="col-md-8 col-md-offset-3">
-		    		  		<button type="submit" class="btn btn-primary" id="signup_submit">signup</button>
-		    		  	</div>
-		    		</div>
-    			
-	    		</form>
-	    	</div>
-	
-		
-	    	<div id="signinPanel" class="panel panel-default  fade in active">
-		    	    <div class="panel-heading">
-		    	    	<div class="panel-title">signin</div>
-		    	    </div>
-
+    	<div id="signupPanel" class="panel panel-default  fade in active">
+    	    <div class="panel-heading">
+    	    	<div class="panel-title">signup</div>
+    	    </div>
     		<form class="form-horizontal">
-    		  <div class="form-group">
-    		  	<label for="name" class="col-md-2 control-label">name</label>
-    		  	<div class="col-md-8 col-md-offset-1">
-    		  		<input type="text" class="form-control" id="name_in" name="name">
+	    		<div class="form-group">
+	    		  	<label for="name_up" class="col-md-2 control-label">name</label>
+	    		  	<div class="col-md-8 col-md-offset-1 parent">
+	    		  		<input type="text" class="form-control" id="name_up" name="name" onf=''>
+
+	    		  		<span id="name_tail"></span>
+	    		 
+	    		  		<div id="name_alert" class="alert alert-danger">
+						</div>
+	    		  	</div>
+	    		</div>
+
+	    		<div class="form-group">
+	    		  	<label class="col-md-2 control-label">sex</label>
+
+	    		  	<div class="col-md-8 col-md-offset-1 parent">
+
+	    		  		<label class="checkbox-inline">
+	    		  		    <input type="radio" id="male" value="male" name="sex" checked=""><span class="sex_t">male</span>
+	    		  		    <input type="text" id="set_img" name="image" value="/images/male.png" sex="male" style="display: none" >
+	    		  		</label>
+	
+	    		  		<label class="checkbox-inline">
+	    		  		    <input type="radio" id="female" value="female" name="sex"><span class="sex_t">female</span>
+	    		  		    
+	    		  		</label>	
+	    		  	</div>
+	    		</div>
+
+	    		<div class="form-group">
+	    		  	<label for="email_up" class="col-md-2 control-label">email</label>
+	    		  	<div class="col-md-8 col-md-offset-1">
+	    		  		<input type="email" class="form-control" id="email_up" name="email" onf=''>
+	    		  		<span id="email_tail"></span>
+
+	    		  		<div id="email_alert" class="alert alert-danger">
+						</div>
+	    		  	</div>
+
+	    		</div>
+
+	    		<div class="form-group">
+	    		  	<label for="password" class="col-md-2 control-label">password</label>
+	    		  	<div class="col-md-8 col-md-offset-1">
+	    		  		<input type="password" class="form-control" id="password_up" name="password">
+	    		  		<div id="password_alert" class="alert alert-danger">
+						</div>
+	    		  	</div>
+
+	    		</div>
+
+	    		<div class="form-group">
+	    		  	<div class="col-md-8 col-md-offset-3">
+	    		  		<button type="button" class="btn btn-primary" id="signup_submit">signup</button>
+	    		  	</div>
+	    		</div>
+    		</form>
+    	</div>
+	
+    	<div id="signinPanel" class="panel panel-default  fade in active">
+    	    <div class="panel-heading">
+    	    	<div class="panel-title">signin</div>
+    	    </div>
+
+			<form class="form-horizontal">
+			  <div class="form-group">
+			  	<label for="name" class="col-md-2 control-label">name</label>
+			  	<div class="col-md-8 col-md-offset-1">
+			  		<input type="text" class="form-control" id="name_in" name="name">
 	    		  	<div id="nm_alert" class="alert alert-danger">
 						
 						
@@ -118,11 +124,11 @@
 				</div>
 
 
-    		  </div>
-    		  <div class="form-group">
-    		  	<label for="password" class="col-md-2 control-label">password</label>
-    		  	<div class="col-md-8 col-md-offset-1">
-    		  		<input type="password" class="form-control" id="password_in" name="password">
+			  </div>
+			  <div class="form-group">
+			  	<label for="password" class="col-md-2 control-label">password</label>
+			  	<div class="col-md-8 col-md-offset-1">
+			  		<input type="password" class="form-control" id="password_in" name="password">
 	    		  	<div id="pd_alert" class="alert alert-danger">
 						
 						
@@ -130,15 +136,15 @@
 				</div>
 
 
-    		  </div>
-    		  <div class="form-group">
-    		  	<div class="col-md-8 col-md-offset-3">
-    		  		<button type="button" class="btn btn-primary" id="signin_submit">signin</button>
-    		  	</div>
-    		  </div>
-    		</form>
+			  </div>
+			  <div class="form-group">
+			  	<div class="col-md-8 col-md-offset-3">
+			  		<button type="button" class="btn btn-primary" id="signin_submit">signin</button>
+			  	</div>
+			  </div>
+			</form>
 	    </div>
-		</div>
+	</div>
 </body>
 </html>
 

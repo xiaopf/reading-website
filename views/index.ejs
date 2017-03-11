@@ -4,10 +4,10 @@
 <link rel='stylesheet' href='/stylesheets/index.css' />
 <script src='/javascripts/index.js'></script>
 
-
+<a id="toTop" href="#top"><span class="glyphicon glyphicon-arrow-up">TOP</span></a> 
 
 <div class="container">
-    <div class="row">
+    <div class="row" >
     	<div class="sort col-md-12">
 
             <%if(via=='no_sort'){%>
@@ -37,39 +37,36 @@
     	</div>
     </div>
 	<div class="row">
+		<ul id="scroll">
 			<% books.forEach(function(book){%>
+			    <li class="book">
+				    <div class="clearfix">
+				  	    <a href="/detail/<%= book.id%>"><img class="bk_pic" src="<%= book.medium_image %>"></a>
+				            <div class="bk_p">
+							    <a href="/detail/<%= book.id%>"><p class="bk_title"><%= book.title %></p></a>
+							    <p class="bk_rating">评分：<%= book.rating.average %></p>
+							    <p class="bk_pudate">出版时间：<%= book.pubdate %></p>
+							    <p class="bk_author">作者：<%= book.author.join('/')%></p>
+							    <p class="bk_tags">
 
+								    <%if(book.author.join('/').length>10){%>
+			                        <%=book.tags.slice(0,1).join('') %>
+								    <%}else if(book.tags.slice(0,3).join('/').length>10){%>
 
+			                        <%=book.tags.slice(0,2).join('/') %>
 
-			  <li class="book">
-				  <div class="clearfix">
-				  	  <a href="/detail/<%= book.id%>"><img class="bk_pic" src="<%= book.medium_image %>"></a>
-				      <div class="bk_p">
-					      <a href="/detail/<%= book.id%>"><p class="bk_title"><%= book.title %></p></a>
-					      <p class="bk_rating">评分：<%= book.rating.average %></p>
-					      <p class="bk_pudate">出版时间：<%= book.pubdate %></p>
-					      <p class="bk_author">作者：<%= book.author.join('/')%></p>
-					      <p class="bk_tags">
-					      <%if(book.author.join('/').length>10){%>
-                          <%=book.tags.slice(0,1).join('') %>
-					      <%}else if(book.tags.slice(0,3).join('/').length>10){%>
+									<%}else{%>
 
-                          <%=book.tags.slice(0,2).join('/') %>
+								    <%=book.tags.slice(0,3).join('/') %>
 
-						  <%}else{%>
+								    <%}%>	
+								    
+							    </p>
+				            </div>
+				    </div>
 
-					      <%=book.tags.slice(0,3).join('/') %>
-
-					      <%}%>	
-					      </p>
-				      </div>
-				  </div>
-
-			      <div class="bk_summary"><%= book.summary.substring(0,46)%> <a href="/detail/<%= book.id%>">(查看全部)</a></div>
-			  </li>   
-
-
-
+			        <div class="bk_summary"><%= book.summary.substring(0,46)%> <a href="/detail/<%= book.id%>">(查看全部)</a></div>
+			    </li>   
 			<% }); %>
 		</ul>
 	</div>

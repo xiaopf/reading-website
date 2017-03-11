@@ -1,33 +1,61 @@
+
+.msg_wrap{
+	display: none;
+	position: fixed;
+	top:0px;
+	z-index: 11;
+	background-color: #83e483;
+	height:38px;
+	width: 100%;
+	text-align: center;
+	padding: 4px 0; 
+}
+#msg{
+	font-size: 20px;
+	line-height: 30px;
+	padding:0;
+	color: #72706b;
+	font-style: italic;
+}
+
 .form-horizontal{
 	margin: 20px;
 }
+
 .panel{
 	margin:20px auto;
 	width: 360px;
 }
+
 .nav_wid{
 	width:146px;
 }
+
 h1{ 
 	font-size:70px;
 	color: #426ab3; 
 	margin:100px 0 30px 0;
+	font-style: italic;
 }
+
 h4{ 
 	font-size: 	20px;
 	color: grey;
 	font-family: Helvetica;
 	margin:0 0 40px 0;
 }
+
 hr{
 	width:50%;
 }
+
 body{
 
 	background: #F7FAFC;
 	overflow: hidden;
 	background: #fff;
 }
+
 #canvas{
 	display: inline-block; 
 	position:absolute;

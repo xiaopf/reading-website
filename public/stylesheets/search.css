@@ -4,9 +4,11 @@
 		width: 90%;
 		padding:5px 5px 5px 25px;
 }
+
 .bk_rating{
 	color: rgb(224, 144, 21);
 }
+
 .book p{
 		margin-bottom:5px;
 }
@@ -21,6 +23,7 @@
 		width: 80px;
 		padding: 5px;
 }
+
 .bk_p{
 		margin-left: 90px;
 		padding: 5px;
@@ -36,4 +39,8 @@
 .bk_summary{
 	padding-bottom: 10px;
 	border-bottom: 1px dotted grey;
+}
+
+.box{
+    padding-bottom: 80px;
 }

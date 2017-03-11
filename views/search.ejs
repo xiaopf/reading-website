@@ -4,9 +4,7 @@
 <link rel='stylesheet' href='/stylesheets/search.css' />
 <script src='/javascripts/search.js'></script>
 
-
-
-<div class="container">
+<div class="container box">
 	<div class="row">
 			<% books.forEach(function(book){%>
 			  <li class="book">
@@ -20,7 +18,6 @@
 						      <p class="bk_tags"><%=book.tags.join('/') %></p>
 					    </div>			        	
 			        </div>
-
 			        <div class="bk_summary"><%= book.summary.substring(0,100) %> <a href="/detail/<%= book.id%>">(查看全部)</a></div>
 			  </li>             
 			<% }); %>

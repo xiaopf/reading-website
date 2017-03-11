@@ -18,7 +18,6 @@ module.exports=function(app){
 	app.get('/upadateUnlike', User.loggedIn, Book.upadateUnlike);
 	app.delete('/deleteDiscuss', User.loggedIn, Book.deleteDiscuss);
 	
-
 	app.get('/admin/entry', User.loggedIn, User.adminR, Book.entry);		
 	app.get('/admin/bookList', User.loggedIn, User.adminR, Book.bookList);
 	app.get('/admin/userList', User.loggedIn, User.adminR, User.userList);
@@ -36,8 +35,6 @@ module.exports=function(app){
 	app.delete('/admin/bookList/deleteBook', User.loggedIn, User.adminR, Book.deleteBook);
     app.delete('/admin/userList/deleteUser', User.loggedIn, User.adminR, User.deleteUser);
 
-
- 
     app.post('/user/updateUser' , User.loggedIn, User.updateUser);
     app.post('/user/updateImage', User.loggedIn, multiparty, User.updateImage);
 }
