@@ -48,7 +48,7 @@ var BookSchema=new Schema({
 });
 
 
-BookSchema.pre('save update',function(next){
+BookSchema.pre('save',function(next){
 	
 	var currentDate=moment();
 	this.updatedAt=currentDate;
