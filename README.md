@@ -1,7 +1,7 @@
 # nodejs+express+mongoDB建站总结
 ## 一、使用教程
 ### 1.nodejs安装
-去[++nodejs官网++](https://nodejs.org/en/)根据自己需求下载相应资源进行安装，网上安装的教程很多不赘述。
+去[nodejs官网](https://nodejs.org/en/)根据自己需求下载相应资源进行安装，网上安装的教程很多不赘述。
 ### 2.mongoDB及可视化工具robomongo安装
 网站的数据通过mongoDB进行存储，去[mongoDB官网](https://www.mongodb.com/download-center?jmp=nav#community)进行下载安装，命令行工具看着不是特别方便，所以可以用免费的数据可视化工具robomongo进行管理，可以去[robomongo官网](https://robomongo.org/)下载安装。
 ### 3.下载源代码及配置
