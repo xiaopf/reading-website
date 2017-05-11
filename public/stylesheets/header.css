@@ -41,6 +41,7 @@ a:focus {
 }
 
 .search_input{
+	    padding-left: 6px;
 		height: 34px;
 		width: 200px;
 }

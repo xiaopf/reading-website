@@ -160,11 +160,13 @@ exports.upadateUnlike=function(req,res){
 
 exports.search=function(req,res){
     var s_user=req.session.user;
-    var sc=req.query.search_content;
-
+    var sc=req.query.search_content.trim();
     Book.find({
         $or:[{'title':new RegExp('.*'+sc+'.*','i')},{'author.0':new RegExp('.*'+sc+'.*','i')},{'isbn13':sc}]
     },function(err,books){
+        if(sc===""){
+          books=[];
+        }
         User.findById(s_user._id,function(err,user){
             if(err){console.log(err);};
             res.render('search',{
@@ -177,7 +179,7 @@ exports.search=function(req,res){
                 sc:sc,
             });
         });
-    });
+    });      
 };
 
 

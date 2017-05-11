@@ -11,7 +11,7 @@ var session=require('express-session');
 var MongoStore=require('connect-mongo')(session);
 
 var mongoose=require('mongoose');
-var dbUrl='mongodb://localhost/webData';
+var dbUrl='mongodb://localhost/db';
 mongoose.connect(dbUrl);
 mongoose.Promise = global.Promise = require('bluebird');
 var db = mongoose.connection;
